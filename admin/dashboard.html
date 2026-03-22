@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表盘 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">📊 数据仪表盘</h1>
+            <div class="dashboard-grid" id="dashboard-grid"></div>
+            <div class="gq-card" style="margin-top:16px">
+                <div class="gq-card-title">📈 近7天活动</div>
+                <div id="weekly-chart" style="display:flex;align-items:flex-end;gap:8px;height:120px;padding:8px 0"></div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/dashboard.js"></script>
+</body>
+</html>

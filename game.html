@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏中心 - 成长冒险岛</title>
+    <meta name="description" content="成长冒险岛游戏中心 - 捕鱼达人">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/front.css">
+    <style>
+        .game-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        .game-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        
+        .game-header {
+            background: linear-gradient(135deg, #4FC3F7 0%, #0288D1 100%);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .game-points {
+            background: rgba(255,255,255,0.25);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .game-frame-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 545px;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .game-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+        
+        .game-info {
+            padding: 16px 20px;
+            background: #f8f9fa;
+        }
+        
+        .game-info-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .game-info-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .game-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-family);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .game-btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            box-shadow: 0 3px 12px rgba(79,195,247,0.35);
+        }
+        
+        .game-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(79,195,247,0.5);
+        }
+        
+        .game-btn-secondary {
+            background: #F5F5F5;
+            color: var(--text-primary);
+        }
+        
+        .game-btn-secondary:hover {
+            background: #EEEEEE;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .game-frame-container {
+                padding-bottom: 75%; /* 4:3 aspect ratio for mobile */
+            }
+            
+            .game-header {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+            
+            .game-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* 游戏列表 */
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .game-item {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .game-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .game-item-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #4FC3F7 0%, #81C784 50%, #FFD54F 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .game-item-info {
+            padding: 16px;
+        }
+        
+        .game-item-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .game-item-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="gq-page-header">
+            <h1 class="gq-page-title">🎮 游戏中心</h1>
+        </div>
+        
+        <!-- 捕鱼达人游戏 -->
+        <div class="game-card">
+            <div class="game-header">
+                <div class="game-title">
+                    <span>🐟</span>
+                    <span>捕鱼达人</span>
+                </div>
+                <div class="game-points">💎 赚取积分</div>
+            </div>
+            
+            <div class="game-frame-container">
+                <iframe src="3/index.html" class="game-frame" id="game-frame" allowfullscreen></iframe>
+            </div>
+            
+            <div class="game-info">
+                <div class="game-info-title">
+                    <span>🎯</span>
+                    <span>游戏说明</span>
+                </div>
+                <div class="game-info-text">
+                    欢迎来到捕鱼达人！点击屏幕发射渔网捕捉各种鱼类，不同鱼类有不同分值。完成每日游戏任务可获得额外积分奖励！
+                </div>
+                <div class="game-controls">
+                    <button class="game-btn game-btn-primary" onclick="fullscreenGame()">
+                        <span>🔳</span>
+                        <span>全屏游戏</span>
+                    </button>
+                    <button class="game-btn game-btn-secondary" onclick="location.reload()">
+                        <span>🔄</span>
+                        <span>重新开始</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 更多游戏列表 -->
+        <div class="gq-card">
+            <div class="gq-card-title">🎲 更多游戏</div>
+            <div class="game-list">
+                <div class="game-item" onclick="showComingSoon()">
+                    <div class="game-item-image">🧩</div>
+                    <div class="game-item-info">
+                        <div class="game-item-title">益智拼图</div>
+                        <div class="game-item-desc">锻炼思维能力，挑战各种拼图关卡</div>
+                    </div>
+                </div>
+                <div class="game-item" onclick="showComingSoon()">
+                    <div class="game-item-image">🎯</div>
+                    <div class="game-item-info">
+                        <div class="game-item-title">射击训练</div>
+                        <div class="game-item-desc">精准射击，提升反应速度</div>
+                    </div>
+                </div>
+                <div class="game-item" onclick="showComingSoon()">
+                    <div class="game-item-image">🏃</div>
+                    <div class="game-item-info">
+                        <div class="game-item-title">跑酷冒险</div>
+                        <div class="game-item-desc">跳跃躲避障碍，收集金币</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // 初始化导航栏
+        Utils.renderNav('game');
+        
+        // 全屏游戏
+        function fullscreenGame() {
+            const frame = document.getElementById('game-frame');
+            if (frame.requestFullscreen) {
+                frame.requestFullscreen();
+            } else if (frame.webkitRequestFullscreen) {
+                frame.webkitRequestFullscreen();
+            } else if (frame.msRequestFullscreen) {
+                frame.msRequestFullscreen();
+            }
+        }
+        
+        // 显示即将上线提示
+        function showComingSoon() {
+            Utils.showToast('🎮 更多游戏即将上线，敬请期待！', 'info');
+        }
+        
+        // 显示大大的金币转换提示
+        function showCoinConvertMessage(coins) {
+            // 创建遮罩层
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            // 创建提示框
+            const messageBox = document.createElement('div');
+            messageBox.style.cssText = `
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 20px;
+                padding: 40px 60px;
+                text-align: center;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                animation: bounceIn 0.5s ease;
+                max-width: 90%;
+            `;
+            
+            messageBox.innerHTML = `
+                <div style="font-size: 80px; margin-bottom: 20px;">🪙</div>
+                <div style="font-size: 28px; color: #fff; font-weight: bold; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                    成功获得 <span style="color: #FFD700; font-size: 36px;">${coins}</span> 枚金币
+                </div>
+                <div style="font-size: 20px; color: #E0E0E0; margin-bottom: 30px;">
+                    已转入商店，赶快去消费吧！
+                </div>
+                <button id="close-coin-message" style="
+                    background: #FFD700;
+                    color: #333;
+                    border: none;
+                    padding: 12px 40px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+                    transition: transform 0.2s;
+                ">太棒了！</button>
+            `;
+            
+            overlay.appendChild(messageBox);
+            document.body.appendChild(overlay);
+            
+            // 添加动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes bounceIn {
+                    0% { transform: scale(0.5); opacity: 0; }
+                    70% { transform: scale(1.05); }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // 点击按钮或遮罩关闭
+            const closeMessage = () => {
+                overlay.style.animation = 'fadeIn 0.3s ease reverse';
+                setTimeout(() => {
+                    overlay.remove();
+                    style.remove();
+                }, 300);
+            };
+            
+            document.getElementById('close-coin-message').addEventListener('click', closeMessage);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeMessage();
+            });
+            
+            // 5秒后自动关闭
+            setTimeout(closeMessage, 5000);
+        }
+        
+        // 监听游戏积分（通过 postMessage）
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'gameScore') {
+                const score = e.data.score;
+                // 可以在这里添加积分奖励逻辑
+                console.log('游戏得分：', score);
+            }
+            // 监听捕鱼游戏金币转换
+            if (e.data && e.data.type === 'convertCoins') {
+                const coins = e.data.coins;
+                if (coins > 0) {
+                    // 添加金币到商店
+                    Store.addCoins(coins, '捕鱼游戏金币转换');
+                    // 显示大大的提示
+                    showCoinConvertMessage(coins);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能力森林配置 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">🌳 能力森林配置</h1>
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <p style="color:var(--text-secondary)">每棵树代表一个科目或爱好</p>
+                <button class="gq-btn gq-btn-primary gq-btn-sm" id="add-tree-btn">+ 新增能力树</button>
+            </div>
+            <div id="trees-list"></div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/forest.js"></script>
+</body>
+</html>

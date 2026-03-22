@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据记录 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/front.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">📅 数据记录</h1>
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="calendar">日历视图</button>
+                <button class="admin-tab" data-tab="points">积分日志</button>
+                <button class="admin-tab" data-tab="ach-log">成就日志</button>
+            </div>
+            <div class="tab-content" id="tab-calendar">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="gq-btn gq-btn-sm gq-btn-secondary" id="cal-prev">◀</button>
+                        <span style="font-weight:700" id="cal-title"></span>
+                        <button class="gq-btn gq-btn-sm gq-btn-secondary" id="cal-next">▶</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+                <div id="cal-detail" style="margin-top:12px"></div>
+            </div>
+            <div class="tab-content" id="tab-points" style="display:none">
+                <div class="admin-table-wrapper"><table class="admin-table">
+                    <thead><tr><th>时间</th><th>变动</th><th>原因</th><th>类型</th></tr></thead>
+                    <tbody id="points-tbody"></tbody>
+                </table></div>
+            </div>
+            <div class="tab-content" id="tab-ach-log" style="display:none">
+                <div id="ach-log-list"></div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/records.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鱼配置 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">🐟 捕鱼游戏配置</h1>
+
+            <div class="gq-card" style="margin-bottom:16px">
+                <div class="gq-card-title">📊 鱼捕获率调整</div>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:16px">调整各鱼类的基础捕获率，避免通货膨胀。捕获率范围：0.01 - 0.99</p>
+                <div id="fish-config-list"></div>
+                <div style="margin-top:16px;display:flex;gap:8px">
+                    <button class="gq-btn gq-btn-primary gq-btn-sm" id="save-fish-config-btn">保存配置</button>
+                    <button class="gq-btn gq-btn-secondary gq-btn-sm" id="reset-fish-config-btn">恢复默认</button>
+                </div>
+            </div>
+
+            <div class="gq-card">
+                <div class="gq-card-title">📈 转换率预览</div>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px">基于当前配置计算的各炮台等级转换率（不考虑空炮）：</p>
+                <div id="conversion-rate-preview"></div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/fish.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成就配置 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">🏅 成就配置</h1>
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                <p style="color:var(--text-secondary)">管理成就，隐藏成就可手动标记解锁</p>
+                <button class="gq-btn gq-btn-primary gq-btn-sm" id="add-ach-btn">+ 新增成就</button>
+            </div>
+            <div class="admin-table-wrapper"><table class="admin-table">
+                <thead><tr><th>图标</th><th>名称</th><th>条件</th><th>奖励</th><th>隐藏</th><th>状态</th><th>操作</th></tr></thead>
+                <tbody id="ach-tbody"></tbody>
+            </table></div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/achievements.js"></script>
+</body>
+</html>

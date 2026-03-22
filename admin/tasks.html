@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务配置 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">📋 任务配置</h1>
+            <!-- 标签页 -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="daily">日常任务</button>
+                <button class="admin-tab" data-tab="random">随机任务库</button>
+                <button class="admin-tab" data-tab="probability">概率调节</button>
+            </div>
+
+            <!-- 日常任务 -->
+            <div class="tab-content" id="tab-daily">
+                <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                    <h3>日常任务列表</h3>
+                    <button class="gq-btn gq-btn-primary gq-btn-sm" id="add-daily-btn">+ 新增</button>
+                </div>
+                <div class="admin-table-wrapper"><table class="admin-table" id="daily-table">
+                    <thead><tr><th>名称</th><th>分类</th><th>积分</th><th>关联能力树</th><th>必做</th><th>操作</th></tr></thead>
+                    <tbody id="daily-tbody"></tbody>
+                </table></div>
+            </div>
+
+            <!-- 随机任务 -->
+            <div class="tab-content" id="tab-random" style="display:none">
+                <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                    <h3>随机任务类别</h3>
+                    <button class="gq-btn gq-btn-primary gq-btn-sm" id="add-category-btn">+ 新增类别</button>
+                </div>
+                <div id="random-categories-list"></div>
+                <hr style="margin:20px 0;border:none;border-top:1px solid #E0E0E0">
+                <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+                    <h3>随机任务库</h3>
+                    <button class="gq-btn gq-btn-primary gq-btn-sm" id="add-random-btn">+ 新增任务</button>
+                </div>
+                <div id="random-filter" style="margin-bottom:12px"></div>
+                <div class="admin-table-wrapper"><table class="admin-table" id="random-table">
+                    <thead><tr><th>类别</th><th>任务名</th><th>难度</th><th>积分</th><th>关联树</th><th>操作</th></tr></thead>
+                    <tbody id="random-tbody"></tbody>
+                </table></div>
+            </div>
+
+            <!-- 概率调节 -->
+            <div class="tab-content" id="tab-probability" style="display:none">
+                <h3 style="margin-bottom:12px">🎲 随机任务抽取概率</h3>
+                <div class="gq-card">
+                    <div id="probability-sliders"></div>
+                    <div class="probability-total" id="probability-total">总计：100%</div>
+                    <button class="gq-btn gq-btn-success" id="save-prob-btn" style="margin-top:12px;width:100%">保存概率设置</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/tasks.js"></script>
+</body>
+</html>

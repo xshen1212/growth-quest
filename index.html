@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成长冒险岛 🏝️</title>
+    <meta name="description" content="成长冒险岛 - 孩子的游戏化成长平台">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/front.css">
+</head>
+<body>
+    <!-- 管理员入口 -->
+    <button class="admin-entry" onclick="location.href='admin/login.html'" title="管理后台">⚙️</button>
+
+    <div class="gq-container">
+        <!-- 角色卡 -->
+        <div class="hero-card" id="hero-card">
+            <div class="hero-avatar" id="hero-avatar">🦸</div>
+            <div class="hero-name" id="hero-name">小冒险家</div>
+            <div class="hero-level" id="hero-level">Lv.1 冒险新手</div>
+            <div class="hero-points">🏆 <span id="hero-points">0</span> 积分 <button class="gq-btn gq-btn-sm gq-btn-primary" id="convert-btn" style="margin-left:8px">转换</button></div>
+        </div>
+
+        <!-- 今日进度 -->
+        <div class="gq-card" style="margin-bottom:16px">
+            <div class="gq-card-title">📋 今日任务进度</div>
+            <div id="today-progress"></div>
+            <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.85rem;color:var(--text-secondary)">
+                <span id="today-daily-count">已完成 0/0</span>
+                <span id="today-random-count">随机 0 个</span>
+            </div>
+        </div>
+
+        <!-- 日常任务区 -->
+        <div class="task-section gq-card" id="daily-section" style="margin-bottom:16px">
+            <div class="task-section-title">✅ 日常任务 <span class="gq-badge gq-badge-green" id="daily-badge">0/0</span></div>
+            <div id="daily-progress-bar"></div>
+            <div id="daily-task-list" style="margin-top:10px"></div>
+            <div id="perfect-day-hint" style="display:none;text-align:center;margin-top:10px;padding:10px;background:#FFF8E1;border-radius:var(--radius-md);font-weight:700;color:var(--color-accent-dark)">
+                🎉 全勤奖励已达成！ +<span id="perfect-bonus">20</span> 积分
+            </div>
+        </div>
+
+        <!-- 随机任务区 -->
+        <div class="task-section gq-card" style="margin-bottom:16px">
+            <div class="task-section-title">� 随机任务 <span class="gq-badge gq-badge-yellow" id="random-badge">已锁定</span></div>
+            <div id="random-area">
+                <!-- 锁定态 -->
+                <div class="random-section-locked" id="random-locked">
+                    <div class="random-lock-icon">🔒</div>
+                    <div class="random-lock-text">完成日常任务后，请爸爸解锁随机任务吧！</div>
+                    <button class="gq-btn gq-btn-accent gq-btn-lg" id="unlock-random-btn">🔑 请爸爸解锁</button>
+                </div>
+                <!-- 解锁态 -->
+                <div id="random-unlocked" style="display:none">
+                    <!-- 老虎机容器 -->
+                    <div class="slot-machine-container" id="slot-machine">
+                        <div class="slot-machine-decoration left">🎰</div>
+                        <div class="slot-machine-decoration right">🎰</div>
+                        <div class="slot-machine-title">🎲 幸运任务抽取机</div>
+                        
+                        <!-- 第一阶段：数字滚动 -->
+                        <div class="slot-machine-phase" id="phase-1">
+                            <div class="slot-machine-number-display">
+                                <div class="slot-machine-number" id="slot-number">?</div>
+                            </div>
+                            <div class="slot-machine-count" id="slot-machine-count">点击下方按钮开始抽取任务数量</div>
+                            <button class="slot-machine-btn" id="start-number-btn">🎯 开始抽取数量</button>
+                        </div>
+                        
+                        <!-- 第二阶段：任务条滚动 -->
+                        <div class="slot-machine-phase" id="phase-2" style="display:none">
+                            <div class="slot-machine-reels-container" id="reels-container">
+                                <!-- 动态生成任务条 -->
+                            </div>
+                            <button class="slot-machine-btn" id="start-reels-btn">� 开始幸运大抽奖</button>
+                        </div>
+                    </div>
+                    <!-- 抽取结果 -->
+                    <div class="random-cards slot-machine-result" id="random-task-list" style="margin-top:16px"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 近期成就 -->
+        <div class="gq-card" style="margin-bottom:16px">
+            <div class="gq-card-title">🏆 最近解锁</div>
+            <div id="recent-achievements">
+                <div class="gq-empty">
+                    <div class="gq-empty-icon">🔒</div>
+                    <div>还没有解锁成就哦，加油完成任务吧！</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

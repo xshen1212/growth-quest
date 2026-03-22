@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商城配置 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">🎁 商城配置</h1>
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="items">商品管理</button>
+                <button class="admin-tab" data-tab="exchange-log">兑换记录</button>
+            </div>
+            <div class="tab-content" id="tab-items">
+                <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+                    <button class="gq-btn gq-btn-primary gq-btn-sm" id="add-item-btn">+ 新增商品</button>
+                </div>
+                <div class="admin-table-wrapper"><table class="admin-table">
+                    <thead><tr><th>图标</th><th>名称</th><th>积分</th><th>类型</th><th>操作</th></tr></thead>
+                    <tbody id="items-tbody"></tbody>
+                </table></div>
+            </div>
+            <div class="tab-content" id="tab-exchange-log" style="display:none">
+                <div class="admin-table-wrapper"><table class="admin-table">
+                    <thead><tr><th>商品</th><th>积分</th><th>时间</th><th>状态</th><th>操作</th></tr></thead>
+                    <tbody id="exchange-tbody"></tbody>
+                </table></div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统设置 - 管理后台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside id="admin-sidebar"></aside>
+        <main class="admin-main">
+            <h1 class="admin-page-title">⚙️ 系统设置</h1>
+
+            <!-- 基础配置 -->
+            <div class="gq-card" style="margin-bottom:16px">
+                <div class="gq-card-title">👤 孩子信息</div>
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">昵称</label>
+                        <input class="gq-input" id="set-nickname">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">头像(Emoji)</label>
+                        <input class="gq-input" id="set-avatar">
+                    </div>
+                </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">当前积分</label>
+                        <input type="number" class="gq-input" id="set-points" min="0">
+                    </div>
+                </div>
+                <button class="gq-btn gq-btn-primary gq-btn-sm" id="save-profile-btn">保存信息</button>
+            </div>
+
+            <!-- 系统配置 -->
+            <div class="gq-card" style="margin-bottom:16px">
+                <div class="gq-card-title">🎮 游戏设置</div>
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">每日随机任务数量</label>
+                        <input type="number" class="gq-input" id="set-random-count" min="1" max="10">
+                    </div>
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">全勤奖励积分</label>
+                        <input type="number" class="gq-input" id="set-perfect-bonus">
+                    </div>
+                </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label">积分转换比例</label>
+                        <input type="number" class="gq-input" id="set-conversion-ratio" min="1" max="100">
+                        <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:4px">1积分 = N开炮分数 (范围: 1-100)</p>
+                    </div>
+                </div>
+                <button class="gq-btn gq-btn-primary gq-btn-sm" id="save-settings-btn">保存设置</button>
+            </div>
+
+            <!-- 密码修改 -->
+            <div class="gq-card" style="margin-bottom:16px">
+                <div class="gq-card-title">🔑 修改密码</div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">当前密码</label>
+                    <input type="password" class="gq-input" id="old-pwd">
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">新密码</label>
+                    <input type="password" class="gq-input" id="new-pwd">
+                </div>
+                <div class="admin-form-group">
+                    <label class="admin-form-label">确认新密码</label>
+                    <input type="password" class="gq-input" id="confirm-pwd">
+                </div>
+                <button class="gq-btn gq-btn-primary gq-btn-sm" id="change-pwd-btn">修改密码</button>
+            </div>
+
+            <!-- 数据备份恢复 -->
+            <div class="gq-card" style="margin-bottom:16px">
+                <div class="gq-card-title">💾 数据备份与恢复</div>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px">备份会将所有数据导出为 JSON 文件，恢复时上传 JSON 文件即可。</p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button class="gq-btn gq-btn-success" id="export-btn">📤 导出备份</button>
+                    <label class="gq-btn gq-btn-primary" style="cursor:pointer">
+                        📥 导入恢复
+                        <input type="file" accept=".json" id="import-input" style="display:none">
+                    </label>
+                    <button class="gq-btn gq-btn-danger" id="reset-btn">🗑️ 重置全部数据</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/admin/settings.js"></script>
+</body>
+</html>
