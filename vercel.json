@@ -3,7 +3,7 @@
   "name": "growth-quest",
   "builds": [
     {
-      "src": "**/*.html",
+      "src": "**/*",
       "use": "@vercel/static"
     }
   ],
