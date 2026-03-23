@@ -2,6 +2,9 @@
  * 成长冒险岛 - 首页逻辑（整合任务功能）
  */
 (function () {
+    // 初始化数据
+    Store.init();
+    
     const today = Store.today();
     let history = Store.get('task_history') || {};
     let todayData = history[today] || { daily: [], random: [], allComplete: false, totalPoints: 0 };
@@ -391,21 +394,31 @@
 
     // ==================== 5. 近期成就 ====================
     function renderRecentAchievements() {
-        const achievements = Store.get('achievements') || [];
-        const recentAch = achievements.filter(a => a.unlocked).sort((a, b) => new Date(b.unlockDate) - new Date(a.unlockDate)).slice(0, 4);
-        const recentEl = document.getElementById('recent-achievements');
-        if (recentAch.length > 0) {
-            recentEl.innerHTML = '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
-                recentAch.map(a => `<div class="achievement-badge unlocked" style="flex:1;min-width:70px">
-                    <span class="achievement-icon">${a.icon}</span>
-                    <span class="achievement-name">${a.name}</span>
-                </div>`).join('') + '</div>';
+        try {
+            const achievements = Store.get('achievements') || [];
+            // 确保achievements是数组
+            const achievementsArray = Array.isArray(achievements) ? achievements : [];
+            const recentAch = achievementsArray.filter(a => a.unlocked).sort((a, b) => new Date(b.unlockDate) - new Date(a.unlockDate)).slice(0, 4);
+            const recentEl = document.getElementById('recent-achievements');
+            if (recentAch.length > 0) {
+                recentEl.innerHTML = '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
+                    recentAch.map(a => `<div class="achievement-badge unlocked" style="flex:1;min-width:70px">
+                        <span class="achievement-icon">${a.icon}</span>
+                        <span class="achievement-name">${a.name}</span>
+                    </div>`).join('') + '</div>';
+            }
+        } catch (e) {
+            console.error('渲染成就出错:', e);
         }
     }
     renderRecentAchievements();
 
     // ==================== 6. 底部导航栏 ====================
-    Utils.renderNav('index');
+    try {
+        Utils.renderNav('index');
+    } catch (e) {
+        console.error('渲染导航栏出错:', e);
+    }
 
     // ==================== 7. 积分转换功能 ====================
     document.getElementById('convert-btn').addEventListener('click', () => {
