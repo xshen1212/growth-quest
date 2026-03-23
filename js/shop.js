@@ -9,27 +9,33 @@
     document.getElementById('current-points').textContent = profile.coins || 0;
 
     function renderShop() {
-        const items = Store.get('shop_items') || [];
-        const grid = document.getElementById('shop-grid');
-        const currentCoins = (Store.get('profile') || {}).coins || 0;
+        try {
+            const items = Store.get('shop_items') || [];
+            // 确保items是数组
+            const itemsArray = Array.isArray(items) ? items : [];
+            const grid = document.getElementById('shop-grid');
+            const currentCoins = (Store.get('profile') || {}).coins || 0;
 
-        grid.innerHTML = items.map(item => {
-            const canAfford = currentCoins >= item.cost;
-            const typeLabels = { privilege: '🌟 特权', material: '📦 实物', boost: '🚀 加速包', convert_card: '🎫 转换卡' };
-            return `<div class="shop-item">
-                <div class="shop-item-icon">${item.icon}</div>
-                <div class="shop-item-name">${item.name}</div>
-                <div class="shop-item-cost">🪙 ${item.cost}</div>
-                <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px">${typeLabels[item.type] || item.type}</div>
-                <button class="gq-btn ${canAfford ? 'gq-btn-accent' : 'gq-btn-secondary'} gq-btn-sm"
-                    ${canAfford ? '' : 'disabled'}
-                    onclick="exchangeItem('${item.id}')">
-                    ${canAfford ? '兑换' : '金币不足'}
-                </button>
-            </div>`;
-        }).join('');
+            grid.innerHTML = itemsArray.map(item => {
+                const canAfford = currentCoins >= item.cost;
+                const typeLabels = { privilege: '🌟 特权', material: '📦 实物', boost: '🚀 加速包', convert_card: '🎫 转换卡' };
+                return `<div class="shop-item">
+                    <div class="shop-item-icon">${item.icon}</div>
+                    <div class="shop-item-name">${item.name}</div>
+                    <div class="shop-item-cost">🪙 ${item.cost}</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px">${typeLabels[item.type] || item.type}</div>
+                    <button class="gq-btn ${canAfford ? 'gq-btn-accent' : 'gq-btn-secondary'} gq-btn-sm"
+                        ${canAfford ? '' : 'disabled'}
+                        onclick="exchangeItem('${item.id}')">
+                        ${canAfford ? '兑换' : '金币不足'}
+                    </button>
+                </div>`;
+            }).join('');
 
-        document.getElementById('current-points').textContent = currentCoins;
+            document.getElementById('current-points').textContent = currentCoins;
+        } catch (e) {
+            console.error('渲染商店出错:', e);
+        }
     }
 
     window.exchangeItem = async function (itemId) {

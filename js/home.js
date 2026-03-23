@@ -38,66 +38,72 @@
 
     // ==================== 3. 日常任务渲染 ====================
     function renderDailyTasks() {
-        const list = document.getElementById('daily-task-list');
-        const completedIds = todayData.daily.map(d => d.taskId);
-        const completedCount = completedIds.length;
-        const totalCount = dailyTasks.length;
-        const requiredTasks = dailyTasks.filter(t => t.required);
-        const requiredDone = requiredTasks.every(t => completedIds.includes(t.id));
+        try {
+            const list = document.getElementById('daily-task-list');
+            // 确保dailyTasks是数组
+            const dailyTasksArray = Array.isArray(dailyTasks) ? dailyTasks : [];
+            const completedIds = todayData.daily.map(d => d.taskId);
+            const completedCount = completedIds.length;
+            const totalCount = dailyTasksArray.length;
+            const requiredTasks = dailyTasksArray.filter(t => t.required);
+            const requiredDone = requiredTasks.every(t => completedIds.includes(t.id));
 
-        // badge
-        document.getElementById('daily-badge').textContent = `${completedCount}/${totalCount}`;
-        // 进度条
-        document.getElementById('daily-progress-bar').innerHTML = Utils.createProgressBar(completedCount, totalCount);
+            // badge
+            document.getElementById('daily-badge').textContent = `${completedCount}/${totalCount}`;
+            // 进度条
+            document.getElementById('daily-progress-bar').innerHTML = Utils.createProgressBar(completedCount, totalCount);
 
-        // 全勤提示
-        if (requiredDone && todayData.allComplete) {
-            document.getElementById('perfect-day-hint').style.display = 'block';
-            document.getElementById('perfect-bonus').textContent = settings.perfectDayBonus || 20;
-            // 更新分数显示
-            const updatedProfile = Store.get('profile') || {};
-            document.getElementById('hero-points').textContent = updatedProfile.currentPoints || 0;
-        } else {
-            document.getElementById('perfect-day-hint').style.display = 'none';
-        }
+            // 全勤提示
+            if (requiredDone && todayData.allComplete) {
+                document.getElementById('perfect-day-hint').style.display = 'block';
+                document.getElementById('perfect-bonus').textContent = settings.perfectDayBonus || 20;
+                // 更新分数显示
+                const updatedProfile = Store.get('profile') || {};
+                document.getElementById('hero-points').textContent = updatedProfile.currentPoints || 0;
+            } else {
+                document.getElementById('perfect-day-hint').style.display = 'none';
+            }
 
-        // 按分类分组
-        const categories = {};
-        dailyTasks.forEach(t => {
-            if (!categories[t.category]) categories[t.category] = [];
-            categories[t.category].push(t);
-        });
-
-        list.innerHTML = '';
-        Object.entries(categories).forEach(([cat, tasks]) => {
-            const catHeader = document.createElement('div');
-            catHeader.style.cssText = 'font-size:0.85rem;font-weight:700;color:var(--text-secondary);margin:12px 0 6px 4px;';
-            catHeader.textContent = cat;
-            list.appendChild(catHeader);
-
-            tasks.forEach(task => {
-                const isCompleted = completedIds.includes(task.id);
-                const el = document.createElement('div');
-                el.className = `task-item ${isCompleted ? 'completed' : ''} animate-slideup`;
-                el.innerHTML = `
-                    <div class="task-checkbox ${isCompleted ? 'checked' : ''}" data-task-id="${task.id}">
-                        ${isCompleted ? '✓' : ''}
-                    </div>
-                    <div class="task-info">
-                        <div class="task-name">${task.name}</div>
-                        <div class="task-meta">
-                            <span class="task-points">+${task.points}分</span>
-                            ${task.treeId ? `<span>🌱 ${getTreeName(task.treeId)}</span>` : ''}
-                            ${task.required ? '<span class="task-required-badge">必做</span>' : ''}
-                        </div>
-                    </div>
-                `;
-                if (!isCompleted) {
-                    el.querySelector('.task-checkbox').addEventListener('click', () => completeTask(task.id));
-                }
-                list.appendChild(el);
+            // 按分类分组
+            const categories = {};
+            dailyTasksArray.forEach(t => {
+                if (!categories[t.category]) categories[t.category] = [];
+                categories[t.category].push(t);
             });
-        });
+
+            list.innerHTML = '';
+            Object.entries(categories).forEach(([cat, tasks]) => {
+                const catHeader = document.createElement('div');
+                catHeader.style.cssText = 'font-size:0.85rem;font-weight:700;color:var(--text-secondary);margin:12px 0 6px 4px;';
+                catHeader.textContent = cat;
+                list.appendChild(catHeader);
+
+                tasks.forEach(task => {
+                    const isCompleted = completedIds.includes(task.id);
+                    const el = document.createElement('div');
+                    el.className = `task-item ${isCompleted ? 'completed' : ''} animate-slideup`;
+                    el.innerHTML = `
+                        <div class="task-checkbox ${isCompleted ? 'checked' : ''}" data-task-id="${task.id}">
+                            ${isCompleted ? '✓' : ''}
+                        </div>
+                        <div class="task-info">
+                            <div class="task-name">${task.name}</div>
+                            <div class="task-meta">
+                                <span class="task-points">+${task.points}分</span>
+                                ${task.treeId ? `<span>🌱 ${getTreeName(task.treeId)}</span>` : ''}
+                                ${task.required ? '<span class="task-required-badge">必做</span>' : ''}
+                            </div>
+                        </div>
+                    `;
+                    if (!isCompleted) {
+                        el.querySelector('.task-checkbox').addEventListener('click', () => completeTask(task.id));
+                    }
+                    list.appendChild(el);
+                });
+            });
+        } catch (e) {
+            console.error('渲染日常任务出错:', e);
+        }
     }
 
     function getTreeName(treeId) {

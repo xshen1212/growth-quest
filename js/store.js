@@ -151,24 +151,30 @@ const Store = {
     },
 
     // 快捷方法（支持异步）
-    async get(key) { 
+    get(key) { 
         const result = this.adapter.get(key);
-        return result instanceof Promise ? await result : result;
+        return result instanceof Promise ? result : result;
     },
-    async set(key, data) { 
+    set(key, data) { 
         const result = this.adapter.set(key, data);
-        return result instanceof Promise ? await result : result;
+        return result instanceof Promise ? result : result;
     },
-    async remove(key) { 
+    remove(key) { 
         const result = this.adapter.remove(key);
-        return result instanceof Promise ? await result : result;
+        return result instanceof Promise ? result : result;
     },
 
     // ==================== 初始化默认数据 ====================
     init() {
-        if (this.get('initialized')) return;
+        console.log('Store.init() called');
+        if (this.get('initialized')) {
+            console.log('Store already initialized');
+            return;
+        }
+        console.log('Initializing default data...');
         this.initDefaultData();
         this.set('initialized', true);
+        console.log('Store initialized successfully');
     },
 
     initDefaultData() {
