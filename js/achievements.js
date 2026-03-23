@@ -2,6 +2,9 @@
  * 成长冒险岛 - 成就页逻辑
  */
 (function () {
+    // 初始化数据
+    Store.init();
+    
     const achievements = Store.get('achievements') || [];
     const unlocked = achievements.filter(a => a.unlocked);
     const visible = achievements.filter(a => !a.hidden || a.unlocked);

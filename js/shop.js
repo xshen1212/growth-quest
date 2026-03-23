@@ -2,6 +2,9 @@
  * 成长冒险岛 - 奖励商城逻辑
  */
 (function () {
+    // 初始化数据
+    Store.init();
+    
     const profile = Store.get('profile') || {};
     document.getElementById('current-points').textContent = profile.coins || 0;
 

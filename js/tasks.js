@@ -2,6 +2,9 @@
  * 成长冒险岛 - 任务页逻辑（日常 + 随机合并）
  */
 (function () {
+    // 初始化数据
+    Store.init();
+    
     const today = Store.today();
     let history = Store.get('task_history') || {};
     let todayData = history[today] || { daily: [], random: [], allComplete: false, totalPoints: 0 };
