@@ -20,7 +20,7 @@
 
     // ==================== 1. 角色卡 ====================
     const profile = Store.get('profile') || {};
-    document.getElementById('hero-avatar').textContent = profile.avatar || '🦸';
+    // 使用图片作为头像，不再使用textContent覆盖
     document.getElementById('hero-name').textContent = profile.nickname || '小冒险家';
     document.getElementById('hero-level').textContent = `Lv.${profile.level || 1} ${getLevelTitle(profile.level || 1)}`;
     document.getElementById('hero-points').textContent = profile.currentPoints || 0;
